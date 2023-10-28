@@ -16,14 +16,14 @@ int32_t main() {
 	int x, y;
 	while (t--) {
 		cin >> x >> y;
-		int counter = 0;
+
 		if (x <= y) {
 			cout << (y - x) << endl;
 			continue;
 		}
 
 		if (x % y == 0 ) {
-			cout << counter << endl;
+			cout << 0 << endl;
 			continue;
 		};
 
