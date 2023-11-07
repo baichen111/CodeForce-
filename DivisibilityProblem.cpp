@@ -11,25 +11,40 @@ int32_t main() {
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
 #endif
-	int t;
-	cin >> t;
-	int x, y;
-	while (t--) {
-		cin >> x >> y;
+	int n;
+	cin >> n;
+	std::vector<char> v;
+	v.reserve(n);
 
-		if (x <= y) {
-			cout << (y - x) << endl;
-			continue;
-		}
+	int x;
+	while (cin >> x) v.push_back(x);
 
-		if (x % y == 0 ) {
-			cout << 0 << endl;
-			continue;
-		};
+	int max_x = *max_element(v.begin(), v.end());
+	int min_x = *min_element(v.begin(), v.end());
+	//cout << "max x: " << max_x << " min x: " << min_x << endl;
+	auto it = find(v.rbegin(), v.rend(), min_x);
 
-		int res = x % y;
-		cout << y - res << endl;
-
+	int min_pos;
+	if (it != v.rend()) {
+		min_pos = std::distance(it, v.rend()) - 1;
 	}
+
+	int max_pos;
+	auto iT = find(v.begin(), v.end(), max_x);
+	if (iT != v.end()) {
+		max_pos = std::distance( v.begin(), iT) ;
+	}
+
+	//cout << "max pos: " << max_pos << " min pos: " << min_pos << endl;
+	if (v[max_pos] == v[0] && v[min_pos] == v[n - 1])cout << 0;
+	else {
+		if (max_pos < min_pos) {
+			cout << (max_pos + n - min_pos - 1);
+		} else {
+			cout << (n - 1 - min_pos + max_pos - 1);
+		}
+	}
+
+
 	return 0;
 }
